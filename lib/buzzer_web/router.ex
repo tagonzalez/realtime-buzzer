@@ -17,6 +17,8 @@ defmodule BuzzerWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    # TODO: limit this to show and create
+    resources "/rooms", RoomController
   end
 
   # Other scopes may use custom stacks.

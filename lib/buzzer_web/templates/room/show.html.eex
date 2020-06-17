@@ -1,0 +1,12 @@
+<h1>Room <%= @room.nanoid %></h1>
+
+<%= content_tag :div, id: "room", data: [id: @room.nanoid] do  %>
+<% end %>
+
+<div class="buzzer-tools">
+  <span class="buzzer-exit"><%= link "Exit", to: Routes.page_path(@conn, :index) %></span>
+</div>
+
+<div class="buzzer-button">
+  <button id="buzzer-button" type="submit" class="buzzer-button">PRESS</button>
+</div>

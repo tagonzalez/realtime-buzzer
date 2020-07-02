@@ -19,6 +19,7 @@ defmodule BuzzerWeb.Router do
     get "/", PageController, :index
     # TODO: limit this to show and create
     resources "/rooms", RoomController
+    post "/rooms/join_by_id", RoomController, :join_by_nanoid
   end
 
   # Other scopes may use custom stacks.

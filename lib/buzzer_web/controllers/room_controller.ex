@@ -6,6 +6,7 @@ defmodule BuzzerWeb.RoomController do
 
   def index(conn, _params) do
     rooms = BuzzerGame.list_rooms()
+    # require IEx; IEx.pry()
     render(conn, "index.html", rooms: rooms)
   end
 
@@ -15,20 +16,30 @@ defmodule BuzzerWeb.RoomController do
   end
 
   def create(conn, %{"room" => room_params}) do
+    # require IEx; IEx.pry()
     case BuzzerGame.create_room(room_params) do
       {:ok, room} ->
+        # require IEx; IEx.pry()
         conn
         |> put_flash(:info, "Room created successfully.")
-        |> redirect(to: Routes.room_path(conn, :show, room))
+        |> redirect(to: Routes.room_path(conn, :show, room, name: room.host, is_host: true))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
   end
 
-  def show(conn, %{"id" => id, "name" => name}) do
+  def show(conn, %{"id" => id, "name" => name, "is_host" => is_host}) do
+    # require IEx; IEx.pry()
     room = BuzzerGame.get_room!(id)
-    render(conn, "show.html", room: room, name: name)
+    render(conn, "show.html", room: room, name: name, is_host: is_host)
+  end
+
+  def join_by_nanoid(conn, %{"nanoid" => nanoid, "name" => name}) do
+    room = BuzzerGame.get_room_by_nanoid!(nanoid)
+    conn
+    |> put_flash(:info, "Joined room succesfully")
+    |> redirect(to: Routes.room_path(conn, :show, room, name: name, is_host: false))
   end
 
   def edit(conn, %{"id" => id}) do

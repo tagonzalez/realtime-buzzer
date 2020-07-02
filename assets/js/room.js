@@ -2,19 +2,19 @@ let Room = {
   init(socket, htmlElement) {
     let roomId = htmlElement.getAttribute("data-id");
     let name = htmlElement.getAttribute("data-name");
-    console.log(`element: ${htmlElement}, roomId: ${roomId}, name: ${name}`);
+    let isHost = htmlElement.getAttribute("data-is-host") == 'true';
     socket.connect();
-    this.onReady({ roomId, name }, socket);
+    this.onReady({ roomId, name, isHost }, socket);
   },
 
-  onReady({ roomId, name }, socket) {
+  onReady({ roomId, name, isHost }, socket) {
     let buzzerButton = document.getElementById("buzzer-button")
     let roomChannel = socket.channel("rooms:" + roomId)
     let msgContainer = document.getElementById("msg-container")
-    let resetButton = document.getElementById("reset-button")
     let exitLink = document.getElementById("buzzer-exit")
+    let resetButton = document.getElementById("reset-button")
 
-    resetButton.style.visibility = 'hidden';
+    if (!isHost) exitLink.style.visibility = 'hidden'
 
     buzzerButton.addEventListener("click", e => {
       roomChannel.push("buzzer_press", { body: name })
@@ -25,7 +25,7 @@ let Room = {
       let presser = resp.body
       buzzerButton.disabled = true
       this.renderPressMessage(msgContainer, presser)
-      resetButton.style.visibility = 'visible'
+      if (isHost) resetButton.style.visibility = 'visible'
     })
 
     resetButton.addEventListener("click", e => {
@@ -36,7 +36,9 @@ let Room = {
     roomChannel.on("buzzer_reset", resp => {
       buzzerButton.disabled = false
       msgContainer.innerHTML = ''
-      resetButton.style.visibility = 'hidden';
+      if (isHost) {
+        resetButton.style.visibility = 'hidden';
+      }
     })
 
     exitLink.addEventListener("click", e => {

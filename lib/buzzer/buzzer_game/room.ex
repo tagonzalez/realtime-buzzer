@@ -4,15 +4,15 @@ defmodule Buzzer.BuzzerGame.Room do
 
   schema "rooms" do
     field :nanoid, :string
-
+    field :host, :string
     timestamps()
   end
 
   @doc false
   def changeset(room, attrs) do
     room
-    |> cast(attrs, [:nanoid])
-    |> validate_required([:nanoid])
+    |> cast(attrs, [:nanoid, :host])
+    |> validate_required([:nanoid, :host])
     |> unique_constraint(:nanoid)
   end
 end

@@ -37,6 +37,8 @@ defmodule Buzzer.BuzzerGame do
   """
   def get_room!(id), do: Repo.get!(Room, id)
 
+  def get_room_by_nanoid!(nanoid), do: Repo.get_by!(Room, nanoid: nanoid)
+
   @doc """
   Creates a room.
 

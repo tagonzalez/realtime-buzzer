@@ -3,16 +3,16 @@
 <table>
   <thead>
     <tr>
-      <th>Nanoid</th>
-
-      <th></th>
+      <th>Id</th>
+      <th>Host</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
 <%= for room <- @rooms do %>
     <tr>
       <td><%= room.nanoid %></td>
-
+      <td><%= room.host %></td>
       <td>
         <span><%= link "Show", to: Routes.room_path(@conn, :show, room) %></span>
         <span><%= link "Edit", to: Routes.room_path(@conn, :edit, room) %></span>

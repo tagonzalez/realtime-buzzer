@@ -5,9 +5,9 @@
     </div>
   <% end %>
 
-  <%= label f, :nanoid %>
-  <%= text_input f, :nanoid %>
-  <%= error_tag f, :nanoid %>
+  <%= label f, :host %>
+  <%= text_input f, :host %>
+  <%= error_tag f, :host %>
 
   <div>
     <%= submit "Save" %>

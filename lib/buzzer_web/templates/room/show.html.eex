@@ -1,6 +1,6 @@
-<h1>Room <%= @room.nanoid %></h1>
-<h1>Name <%= @name %> </h1>
-<%= content_tag :div, id: "room", data: [id: @room.nanoid, name: @name] do  %>
+<h1>Room ID: <%= @room.nanoid %></h1>
+<h1>Name: <%= @name %> </h1>
+<%= content_tag :div, id: "room", data: [id: @room.nanoid, name: @name, is_host: @is_host] do  %>
 <% end %>
 
 <div class="buzzer-tools">
@@ -13,6 +13,7 @@
 
 <h1 id="msg-container">
 </h1>
+
 <div class="reset-button">
-  <button id="reset-button" type="submit" class="reset-button">RESET</button>
+  <button id="reset-button" style="visibility: hidden" type="submit" class="reset-button">RESET</button>
 </div>

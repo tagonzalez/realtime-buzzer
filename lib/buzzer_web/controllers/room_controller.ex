@@ -26,9 +26,9 @@ defmodule BuzzerWeb.RoomController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"id" => id, "name" => name}) do
     room = BuzzerGame.get_room!(id)
-    render(conn, "show.html", room: room)
+    render(conn, "show.html", room: room, name: name)
   end
 
   def edit(conn, %{"id" => id}) do

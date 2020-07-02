@@ -89,6 +89,8 @@ defmodule Buzzer.BuzzerGame do
     Repo.delete(room)
   end
 
+  def delete_room_by(query), do: Repo.delete(Repo.get_by!(Room, query))
+
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking room changes.
 

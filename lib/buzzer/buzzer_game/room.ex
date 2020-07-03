@@ -8,7 +8,6 @@ defmodule Buzzer.BuzzerGame.Room do
     timestamps()
   end
 
-  @doc false
   def changeset(room, attrs) do
     room
     |> cast(attrs, [:nanoid, :host])

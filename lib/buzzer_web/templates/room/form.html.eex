@@ -5,7 +5,7 @@
     </div>
   <% end %>
 
-  <%= label f, :host %>
+  <label>Your name</label>
   <%= text_input f, :host %>
   <%= error_tag f, :host %>
 

@@ -1,0 +1,7 @@
+<%= form_for @conn, Routes.room_path(@conn, :join_by_nanoid), fn f -> %>
+  <label>Join a Room ID</label>
+  <%= text_input f, :nanoid %>
+  <label>Name</label>
+  <%= text_input f, :name %>
+  <%= submit "Join" %>
+<% end %>

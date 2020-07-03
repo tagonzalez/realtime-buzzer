@@ -18,8 +18,9 @@ defmodule BuzzerWeb.Router do
 
     get "/", PageController, :index
     # TODO: limit this to show and create
-    resources "/rooms", RoomController
+    resources "/rooms", RoomController, only: [:create, :show, :new]
     post "/rooms/join_by_id", RoomController, :join_by_nanoid
+    get "/pages/join", PageController, :join
   end
 
   # Other scopes may use custom stacks.

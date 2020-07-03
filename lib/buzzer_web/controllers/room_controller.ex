@@ -6,7 +6,6 @@ defmodule BuzzerWeb.RoomController do
 
   def index(conn, _params) do
     rooms = BuzzerGame.list_rooms()
-    # require IEx; IEx.pry()
     render(conn, "index.html", rooms: rooms)
   end
 
@@ -16,10 +15,8 @@ defmodule BuzzerWeb.RoomController do
   end
 
   def create(conn, %{"room" => room_params}) do
-    # require IEx; IEx.pry()
     case BuzzerGame.create_room(room_params) do
       {:ok, room} ->
-        # require IEx; IEx.pry()
         conn
         |> put_flash(:info, "Room created successfully.")
         |> redirect(to: Routes.room_path(conn, :show, room, name: room.host, is_host: true))
@@ -30,7 +27,6 @@ defmodule BuzzerWeb.RoomController do
   end
 
   def show(conn, %{"id" => id, "name" => name, "is_host" => is_host}) do
-    # require IEx; IEx.pry()
     room = BuzzerGame.get_room!(id)
     render(conn, "show.html", room: room, name: name, is_host: is_host)
   end

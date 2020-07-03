@@ -21,13 +21,10 @@ defmodule BuzzerWeb.RoomChannel do
   end
 
   def handle_in("room_close", payload, socket) do
-    require IEx; IEx.pry
-    broadcast!(socket, "room_close", %{
-      body: payload["body"]
-    })
-
-    BuzzerGame.delete_room_by(nanoid: payload["body"]["roomId"])
-
+    body = payload["body"]
+    roomId = body["roomId"]
+    broadcast!(socket, "room_close", %{ body: body })
+    BuzzerGame.delete_room_by(nanoid: roomId)
     {:reply, :ok, socket}
   end
 end

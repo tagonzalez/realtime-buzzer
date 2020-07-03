@@ -4,4 +4,8 @@ defmodule BuzzerWeb.PageController do
   def index(conn, _params) do
     render(conn, "index.html")
   end
+
+  def join(conn, _params) do
+    render(conn, "join.html")
+  end
 end

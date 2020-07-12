@@ -17,10 +17,10 @@ defmodule BuzzerWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    # TODO: limit this to show and create
+    get "/join", PageController, :join
+
     resources "/rooms", RoomController, only: [:create, :show, :new]
-    post "/rooms/join_by_id", RoomController, :join_by_nanoid
-    get "/pages/join", PageController, :join
+    post "/rooms/join", RoomController, :join
   end
 
   # Other scopes may use custom stacks.
